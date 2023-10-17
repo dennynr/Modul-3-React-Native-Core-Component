@@ -82,13 +82,20 @@ const datas = [
 
 // Functional Component
 const List = () => {
-  const [selectedItem, setSelectedItem] = useState(null)
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState({
+    isVisible: false,
+    itemTerpilih: null,
+  });
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity style={styles.view} onPress={() => {
-        setSelectedItem(item);
-        setModalVisible(true);
+        setModalVisible(
+          {
+            isVisible: true,
+            itemTerpilih: item,
+          }
+
+        );
       }}
       >
         <View>
@@ -104,22 +111,31 @@ const List = () => {
       <Modal
         animationType="fade"
         transparent={true}
-        visible={modalVisible}
+        visible={modalVisible.isVisible}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
+          setModalVisible({
+
+            isVisible: false,
+            itemTerpilih: null,
+          });
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            {selectedItem && (
+            {modalVisible.itemTerpilih && (
               <View>
-                <Image source={{ uri: selectedItem.image }} style={styles.image} />
-                <Text style={styles.text}>{selectedItem.title}</Text>
+                <Image source={{ uri: modalVisible.itemTerpilih.image }} style={styles.image} />
+                <Text style={styles.text}>{modalVisible.itemTerpilih.title}</Text>
               </View>
             )}
             <TouchableOpacity
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
+              onPress={() => {
+                setModalVisible({
+                  isVisible: false,
+                  itemTerpilih: null,
+                });
+              }}>
               <Text style={styles.textStyle}>Close</Text>
             </TouchableOpacity>
           </View>
