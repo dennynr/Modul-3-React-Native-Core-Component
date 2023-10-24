@@ -5,11 +5,10 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
   Modal,
 } from "react-native";
 import React, { useState } from 'react';
-
+import { Button,NativeBaseProvider,Box } from "native-base";
 // Dummmy Data (Array of Object)
 const datas = [
   {
@@ -79,8 +78,6 @@ const datas = [
       "https://ittelkom-sby.ac.id/wp-content/uploads/2022/09/DSC_1931-768x512.jpg",
   },
 ];
-
-// Functional Component
 const List = () => {
   const [modalVisible, setModalVisible] = useState({
     isVisible: false,
@@ -88,7 +85,7 @@ const List = () => {
   });
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.view} onPress={() => {
+      <Button padding={15} backgroundColor={'white'} borderBottomColor={"#dddddd"} borderBottomWidth={1}  onPress={() => {
         setModalVisible(
           {
             isVisible: true,
@@ -98,16 +95,16 @@ const List = () => {
         );
       }}
       >
-        <View>
-          <Image source={{ uri: item.image }} style={styles.image} />
-          <Text style={styles.text}>{item.title}</Text>
-        </View>
-      </TouchableOpacity>
+        <Box >
+          <Image alt="list" source={{ uri: item.image }} height={200} width={null} />
+          <Text fontSize={30} paddingTop={20}>{item.title}</Text>
+        </Box>
+      </Button>
     );
   };
   // MODAL
   return (
-    <View>
+    <Box>
       <Modal
         animationType="fade"
         transparent={true}
@@ -120,95 +117,36 @@ const List = () => {
             itemTerpilih: null,
           });
         }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+        <Box flex={1} justifyItems={'center'} alignItems={'center'} marginTop={32}>
+          <Box margin={30} backgroundColor={'white'} borderRadius={20} padding={35} alignItems={'center'} shadowColor={'#000'} >
             {modalVisible.itemTerpilih && (
-              <View>
-                <Image source={{ uri: modalVisible.itemTerpilih.image }} style={styles.image} />
-                <Text style={styles.text}>{modalVisible.itemTerpilih.title}</Text>
-              </View>
+              <Box>
+                <Image alt="article" source={{ uri: modalVisible.itemTerpilih.image }} height={200} width={null}/>
+                <Text fontSize={18} paddingTop={10}>{modalVisible.itemTerpilih.title}</Text>
+              </Box>
             )}
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
+            <Button
+              borderRadius={5} padding={3} backgroundColor={'red.500'} 
               onPress={() => {
                 setModalVisible({
                   isVisible: false,
                   itemTerpilih: null,
                 });
               }}>
-              <Text style={styles.textStyle}>Close</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+             Close
+            </Button>
+          </Box>
+        </Box>
       </Modal>
       <FlatList
         data={datas}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
-    </View>
+    </Box>
   );
 };
 
-// Styles
-const styles = StyleSheet.create({
-  view: {
-    padding: 15,
-    borderBottomColor: "#dddddd",
-    borderBottomWidth: 1,
-  },
-  image: {
-    height: 200,
-    width: null,
-  },
-  text: {
-    fontSize: 18,
-    paddingTop: 10,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: 'red',
-    borderRadius: 2,
-    marginTop: 8,
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-});
 
 export default List;
 

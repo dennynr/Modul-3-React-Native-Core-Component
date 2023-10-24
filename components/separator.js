@@ -1,8 +1,9 @@
 
-import { View } from "react-native";
+
+import {Box} from "native-base";
 
 const Separator = (props) => {
-  return <View style={{ height: props.height }}></View>;
+  return <Box height={props.height} ></Box>;
 };
 
 export default Separator;

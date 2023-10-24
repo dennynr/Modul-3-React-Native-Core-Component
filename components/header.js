@@ -1,57 +1,39 @@
 
-import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
-
+import { Image ,Box, Pressable} from "native-base";
 const Header = (props) => {
     return (
-        <View style={styles.header}>
-            <TouchableOpacity onPress={() => props.drawer.current.openDrawer()}>
-                <Image
+        <Box backgroundColor={"#AA0002"} flexDirection={"row"} justifyContent={"space-between"} padding={15}>
+            <Pressable onPress={() => props.drawer.current.openDrawer()}>
+                <Image alt="Menu"
                     source={require("../assets/menu.png")}
-                    style={{ width: 18, height: 18 }}
+                    width={18} height={18}
                 />
-            </TouchableOpacity>
-            <View>
-                <View style={styles.iconsView}>
-                    <Image
+            </Pressable>
+            <Box>
+                <Box flexDirection={"row"} alignItems={"center"} justifyContent={"center"}>
+                    <Image alt="facebook"
                         source={require("../assets/facebook.png")}
-                        style={styles.icons}
+                        width={5} marginRight={3}  height={5} 
                     />
-                    <Image
+                    <Image alt="youtube"
                         source={require("../assets/youtube.png")}
-                        style={styles.icons}
+                        width={5} marginRight={3} height={5} 
                     />
-                    <Image
+                    <Image alt="twitter"
                         source={require("../assets/twitter.png")}
-                        style={styles.icons}
+                        width={5} marginRight={3} height={5} 
                     />
-                    <Image
+                    <Image alt="search"
                         source={require("../assets/search.png")}
-                        style={styles.icons}
+                        width={5} height={5} 
                     />
-                </View>
-            </View>
-        </View>
+                </Box>
+            </Box>
+        </Box>
     );
 };
 
-const styles = StyleSheet.create({
-    header: {
-        backgroundColor: "#AA0002",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        padding: 15,
-    },
-    iconsView: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    icons: {
-        width: 36,
-        height: 16,
-        resizeMode: "contain",
-    },
-});
+
 
 export default Header;
 

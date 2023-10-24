@@ -1,5 +1,5 @@
 
-import { ScrollView, Image, View, Text, StyleSheet, Alert } from "react-native";
+import { NativeBaseProvider, Image, Box, ScrollView, Text,Alert } from "native-base";
 import Separator from "../components/separator";
 import Button from "../components/button";
 
@@ -10,28 +10,28 @@ const Article = () => {
 
   return (
     <ScrollView>
-      <Image
+      <Image alt="article"
         source={{
           uri: "https://ce.ittelkom-sby.ac.id/wp-content/uploads/2020/09/WhatsApp-Image-2018-04-18-at-11.47.40-AM-1024x564-1.png",
         }}
-        style={styles.logo}
+        height={100} resizeMode="contain" marginY={20}
       />
-      <View style={styles.titleView}>
-        <Text style={styles.title}>
+      <Box paddingX={15} paddingY={20} backgroundColor={'#eeeeee'}>
+        <Text fontSize={24} fontWeight={"bold"}>
           Benarkah Generasi Baru Generasi Strawberi? Ayo Belajar Growth Mindset
           dari Kampus ITTelkom Surabaya
         </Text>
-      </View>
-      <View style={styles.content}>
-        <Image
+      </Box>
+      <Box p={4}>
+        <Image alt="Image"
           source={{
             uri: "https://ittelkom-sby.ac.id/wp-content/uploads/2022/10/asdfghkl-768x472.jpg",
           }}
-          style={styles.mainImage}
+          height={220} fontWeight={"bold"}
         />
         <Separator height={10} />
         <Text>
-          <Text style={{ fontWeight: "bold" }}>Surabaya, Oktober 2022</Text> -
+          <Text fontWeight={"bold"}>Surabaya, Oktober 2022</Text> -
           Ada sebuah sebutan baru-baru ini yang kerap dilemparkan pada mereka
           yang lahir pada tahun 2000-an, generasi strawberi. Pelabelan ini
           dikarenakan generasi sebelumnya (Boomers dan X) menilai generasi muda
@@ -93,40 +93,18 @@ const Article = () => {
           adalah generasi yang sangat kreatif, kritis, dan cerdas." Jelasnya.
         </Text>
         <Separator height={10} />
-        <Text style={{ fontWeight: "bold" }}>OCTOBER 12, 2023 </Text>
+        <Text fontWeight={"bold"}>OCTOBER 12, 2023 </Text>
         <Separator height={10} />
-        <View style={{ backgroundColor: "gray", height: 1 }} />
+        <Box backgroundColor={"gray.500"} height={1} />
         <Separator height={20} />
         <Button text="Share" onPress={buttonHandler} />
         <Separator height={70} />
-      </View>
+      </Box>
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  logo: {
-    height: 100,
-    resizeMode: "contain",
-    marginVertical: 15,
-  },
-  titleView: {
-    paddingHorizontal: 15,
-    paddingVertical: 20,
-    backgroundColor: "#eeeeee",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  mainImage: {
-    height: 220,
-    resizeMode: "contain",
-  },
-  content: {
-    padding: 15,
-  },
-});
+
 
 export default Article;
 
